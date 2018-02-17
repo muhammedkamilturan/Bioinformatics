@@ -21,7 +21,7 @@ class Fragment(Direction):
     @contain.setter
     def contain(self, value):
         self.__seq = value.upper()
-        
+
     @property
     def symbol(self):
         return self.__symbol

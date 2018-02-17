@@ -16,10 +16,9 @@ class GaGene(object):
 
     def apply(self):
         temp = sorted(self.__gene, reverse = True)
-        temp = self[::]
         for i in temp:
-            temp = self.__f[:i]+'-'+self.__f[i:]
-        self.__f._seq = temp
+            self.__f.contain = self.__f[:i]+'-'+self.__f[i:]
+        return self.__f
 
     def __iter__(self):
         return self

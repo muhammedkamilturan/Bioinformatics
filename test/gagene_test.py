@@ -8,6 +8,8 @@ g = GaGene(f)
 
 for i in g:
     print(i)
-g.apply()
 
-print(f)
+f1 = g.apply()
+
+print(f1)
+
