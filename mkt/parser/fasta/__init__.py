@@ -1,0 +1,1 @@
+from mkt.parser.fasta.mkt_parser_fasta import Fasta
