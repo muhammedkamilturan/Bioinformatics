@@ -15,6 +15,14 @@ class Fragment(Direction):
         self._type = Molecules.FRAGMNET
 
     @property
+    def contain(self):
+        return self.__seq
+
+    @contain.setter
+    def contain(self, value):
+        self.__seq = value.upper()
+        
+    @property
     def symbol(self):
         return self.__symbol
 
@@ -64,6 +72,6 @@ class Fragment(Direction):
     def __repr__(self):
         return "{} {}: {} <{}> [{}]".format(self.__symbol,
                                             super().__repr__(),
-                                            self[::],
+                                            self.__seq,
                                             len(self),
                                             self._type)

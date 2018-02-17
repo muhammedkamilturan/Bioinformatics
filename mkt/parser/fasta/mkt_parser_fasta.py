@@ -16,6 +16,6 @@ class Fasta(object):
             if line.startswith('>'):
                 if seq != '':
                     result.append(Fragment('fasta_{}'.format(str(len(result)+1)) ,5, seq.replace('\n',''), title=line.replace('\n','')))
-                    seq = '' 
+                    seq = ''
             else:
                 seq = seq + line

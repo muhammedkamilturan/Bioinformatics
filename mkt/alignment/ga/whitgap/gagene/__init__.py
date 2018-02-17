@@ -1,0 +1,1 @@
+from mkt.alignment.ga.whitgap.gagene.mkt_aligment_ga_whitgap_gagene import GaGene
