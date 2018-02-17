@@ -5,6 +5,10 @@ class Molecules(Enum):
     RNA = 1
     PROTEIN = 2
     FRAGMNET = 3
+    ALIGMENT_FRAGMENT=4
+    ALIGMENT_DNA = 5
+    ALIGMENT_RNA = 6
+    ALIGMNET_PROTEIN = 7
 
     def describe(self):
         return self.name , self.value

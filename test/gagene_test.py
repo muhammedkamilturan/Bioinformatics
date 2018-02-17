@@ -10,6 +10,18 @@ for i in g:
     print(i)
 
 f1 = g.apply()
+print(f1)
+
+for i in range(100000):
+    g.auto_mutatio()
+f1 = g.apply()
+print('İLK 100000 mutasyon')
+print(f1)
+for i in range(100000):
+    g.auto_mutatio()
+
+
+f1 = g.apply()
 
 print(f1)
 
