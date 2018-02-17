@@ -1,0 +1,11 @@
+from mkt.core.molecules.rna import Rna
+
+r1 = Rna('Teo1', 5, 'GGGGAUGAAACCCGGGUUUAAAUUUCCCGAUGAAACCCGGGUUUAAAUUUCCCGGGUAAGGUAAGGAUGAAACAUGAAACCCGGGUUUAAAUUUCCCGGGUAACCGGGUUUAAAUUAUGAAACCCGGGUUUAAAUUUCCCGGGUAAUCCCGGGUAA', 'deneme')
+print(r1)
+
+p1 = r1.translation()
+print(p1)
+
+orfs = r1.orfs()
+for i in orfs:
+    print(i, i.start_point)

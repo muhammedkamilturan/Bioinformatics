@@ -1,0 +1,1 @@
+from mkt.core.tables.mkt_core_tables import AminoacidToCodon, CodonToAminoacid

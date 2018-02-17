@@ -1,0 +1,1 @@
+from mkt.core.molecules.protein.mkt_core_molecules_protein import Protein

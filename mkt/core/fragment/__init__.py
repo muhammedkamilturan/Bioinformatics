@@ -1,0 +1,1 @@
+from mkt.core.fragment.mkt_core_fragment import Fragment
