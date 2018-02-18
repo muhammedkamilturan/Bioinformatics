@@ -37,7 +37,7 @@ def parsEtSqlYaz(fileName):
            # sqlTam+=sql+";"
             #print(str(satirNo)+" "+sql)
             im.execute(sql)
-            vt.commit()
+            #vt.commit()
             if (satirNo%1000)==0:
                 print(satirNo)
     return sqlTam
@@ -48,5 +48,5 @@ fileNameOriginal="C:\\Users\\Hakan\\Downloads\\current_GREENGENES_gg16S_unaligne
 sqlDis=parsEtSqlYaz(fileNameOriginal)
 #print(sqlDis)
 
-#vt.commit()
+vt.commit()
 
