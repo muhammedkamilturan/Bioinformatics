@@ -1,5 +1,6 @@
 import  sqlite3
 
+
 vt=sqlite3.connect("d:/py3/bioinformatics/mkt/greengenes/db/greengenes.db")
 im=vt.cursor()
 
