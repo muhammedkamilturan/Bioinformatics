@@ -47,6 +47,5 @@ fileNameTest="C:\\Users\\Hakan\\Downloads\\test.fasta"
 fileNameOriginal="C:\\Users\\Hakan\\Downloads\\current_GREENGENES_gg16S_unaligned.fasta"
 sqlDis=parsEtSqlYaz(fileNameOriginal)
 #print(sqlDis)
-
 vt.commit()
 
