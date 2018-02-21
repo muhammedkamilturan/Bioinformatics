@@ -1,1 +1,1 @@
-from mkt.alignment.ga.whitgap.gachromosome.mkt_alignment_ga_whitgap_gachromosome import  GaChromosome
+from mkt.alignment.ga.whitgap.gachromosome.mkt_alignment_ga_whitgap_gachromosome import GaChromosome

@@ -1,13 +1,9 @@
-import copy
-import datetime
+from mkt.alignment.ga.whitgap.gagenes.mkt_alignment_whitgap_gagenes import GaGenes
 import random
-from mkt.alignment.ga.whitgap.gagene.mkt_aligment_ga_whitgap_gagene import GaGene
-from mkt.core.types.mkt_core_types import Molecules
-
+import datetime
+import copy
 
 class GaChromosome(object):
-
-    random.seed(datetime.datetime.now())
 
     #SCORE MATRIX
     __ns = {'AA': 10, 'AC': -1, 'AG': -2, 'AT': -3, 'A-': -4, 'AN': 10, 'NA': 10,
@@ -16,11 +12,13 @@ class GaChromosome(object):
           'TA': -3, 'TC': -2, 'TG': -4, 'TT': 10, 'T-': -1, 'TN': 10, 'NT': 10,
           '-A': -4, '-C': -3, '-G': -3, '-T': -1, '--': -5, '-N': -2, 'N-': 2, 'NN': 10}
 
+    random.seed(datetime.datetime.now())
+
     def __init__(self, fragments):
-        self.__fs = copy.deepcopy(fragments)
-        self.__genes = []
-        for i in range(len(self.__fs)):
-            self.__genes.append(GaGene(self.__fs[i]))
+        self.__f = fragments
+        self.__chr = []
+        for i in fragments:
+            self.__chr.append(GaGenes(i))
         self.__score = 0
 
     @property
@@ -33,39 +31,48 @@ class GaChromosome(object):
 
     @property
     def genes(self):
-        return self.__genes
+        return self.__chr
 
     @genes.setter
     def genes(self, value):
-        self.__genes = value
+        self.__chr = value
+
+    def recombination(self, other):
+        t1 = random.randint(0, len(self.__chr)-1)
+        break_point = min(len(self.__chr[t1].contain), len(other.genes[t1].contain))
+        g1C = self.__chr[t1].contain[:break_point] + other.genes[t1].contain[break_point:]
+        g2C = other.genes[t1].contain[:break_point] + self.__chr[t1].contain[break_point:]
+        self.__chr.remove(self.__chr[t1])
+        other.genes.remove(other.genes[t1])
+        g1 = GaGenes(self.__f[t1])
+        g2 = GaGenes(self.__f[t1])
+        g1.contain = copy.deepcopy(g1C)
+        g2.contain = copy.deepcopy(g2C)
+        return (g1, g2)
 
     def apply(self):
-        #Genler fragmentlere uygulanacak ve nihayi uzunlukları aynı olsun diye max length maxl bulunacak
-        contain = []
-        maxl = -1
-        for i in self.__genes:
-            f1 = i.apply()
-            if maxl < len(f1):
-                maxl = len(f1)
-            contain.append(f1.contain)
-        #solutions boyları maxl 'da eşitlenecek ve bu sayede hepsinin boyu aynı olacak ve scorelanabilecekler
-        for i in range(len(contain)):
-            contain[i] = contain[i] + '-'*(maxl - len(contain[i]))
-            self.__fs[i].contain = contain[i]
-            self.__fs[i]._type = Molecules.ALIGMENT_FRAGMENT
-        tr_contain = []
-        #uygulma matrisinin transpozesi alınacak ve her dikey satır scorelanacak ve toplanarak CHR SCORE oluşturulacak
-        for i in range(maxl):
-            temp = ''
-            for j in range(len(self.__genes)):
-                temp = temp + contain[j][i]
-            tr_contain.append(temp)
         self.__score = 0
-        for k in tr_contain:
+        f = []
+        maxl = -1
+        #fragmentlere gen çözümleri uygulanıyor
+        for i in self.__chr:
+            tempf = i.apply()
+            if len(tempf) > maxl:
+                maxl = len(tempf)
+            f.append(tempf)
+        #sonuç boyları eşitleniyor
+        for i in f:
+            if len(i) < maxl:
+                i.contain = i.contain + "-"*(maxl - len(i))
+        #score hesaplamak için transposeleri alınacak
+        t_f = []
+        for i in range(len(f[0])):
+            temp = []
+            for j in range(len(f)):
+                temp.append(f[j].contain[i])
+            t_f.append(temp)
+        #score hesaplanıyor
+        for k in t_f:
             for i in range(len(k)):
                 for j in range(i+1, len(k)):
-                    self.__score = self.__score + self.__ns[k[i]+k[j]]
-
-
-
-
+                    self.__score = self.__score + self.__ns[k[i] + k[j]]
